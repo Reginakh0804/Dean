@@ -16,7 +16,7 @@ def register_handlers(dp):
 
 async def start(message: types.Message, state: FSMContext):
     await state.finish()
-    await message.answer("🇷🇺 Выберите язык
+    await message.answer("Ru Выберите язык")
 🇺🇸 Choose a language
 🇺🇿 Tilni tanlang", reply_markup=MESSAGES["language"])
     await Register.Language.set()
