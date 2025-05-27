@@ -16,14 +16,13 @@ def register_handlers(dp):
 
 async def start(message: types.Message, state: FSMContext):
     await state.finish()
-    await message.answer("Ru Выберите язык")
-Choose a language
-🇺🇿 Tilni tanlang", reply_markup=MESSAGES["language"])
+    await message.answer("🇷🇺 Выберите язык\n🇬🇧 Choose a language\n🇺🇿 Tilni tanlang", reply_markup=MESSAGES["language"])
+
     await Register.Language.set()
 
 async def set_language(message: types.Message, state: FSMContext):
     lang = message.text.lower()
-    if "узбек" in lang:
+    if "узбек" in lang or "til" in lang:
         await state.update_data(lang="uz")
     elif "english" in lang:
         await state.update_data(lang="en")
@@ -53,17 +52,12 @@ async def get_message(message: types.Message, state: FSMContext):
     data = await state.get_data()
 
     full_message = (
-        f"<b>Новое обращение от студента</b>
-"
-        f"📞 Телефон: {data['phone']}
-"
-        f"👤 ФИО: {data['name']}
-"
-        f"🏷️ Группа: {data['group']}
-"
-        f"📝 Обращение:
-{data['text']}"
-    )
+    f"<b>Новое обращение от студента</b>\n"
+    f"📞 Телефон: {data['phone']}\n"
+    f"👤 ФИО: {data['name']}\n"
+    f"🏷️ Группа: {data['group']}\n"
+    f"📝 Обращение:\n{data['text']}"
+)
 
     await message.bot.send_message(chat_id=GROUP_ID, text=full_message, parse_mode="HTML")
     await message.answer(MESSAGES["done"])
