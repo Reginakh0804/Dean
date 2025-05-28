@@ -1,5 +1,4 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-
 MESSAGES = {
     "ru": {
         "language": ReplyKeyboardMarkup(resize_keyboard=True).add(
